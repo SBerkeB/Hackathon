@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 # from fastapi.staticfiles import StaticFiles
-# from fastapi.templating import Jinja2Templates
+from fastapi.templating import Jinja2Templates
 from pymongo import MongoClient
 from dotenv import dotenv_values
 
@@ -14,9 +14,11 @@ CFG = dotenv_values(".env")
 
 
 app = FastAPI()
+
 app.include_router(database.router)
 app.include_router(user_access.router)
 
+templates = Jinja2Templates(directory="/html")
 # app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # templates = Jinja2Templates(directory="templates")
