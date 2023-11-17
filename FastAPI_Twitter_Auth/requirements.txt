@@ -1,0 +1,4 @@
+fastapi
+uvicorn
+httptools
+tweepy==3.9.0
