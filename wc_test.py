@@ -20,7 +20,7 @@ load_dotenv()
 
 WORLDCOIN_CLIENT_ID = os.getenv("WORLDCOIN_CLIENT_ID")
 WORLDCOIN_CLIENT_SECRET = os.getenv("WORLDCOIN_CLIENT_SECRET")
-WORLDCOIN_AUTH_URL = "https://worldcoinindex.com/apiservice/oauth"
+WORLDCOIN_AUTH_URL = "https://worldcoinindex.com/api  service/oauth"
 WORLDCOIN_TOKEN_URL = "https://worldcoinindex.com/apiservice/oauth/access_token"
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(
