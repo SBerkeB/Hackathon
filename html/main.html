@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swirl Home Page</title>
+    <link href="{{ url_for('statics', path='/main.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+    <div>
+      <!-- <div className='App'>
+          <WorldIDWidget
+              actionId='wid_staging_1c829bf138a85d3b022f50708046befa' // obtain this from developer.worldcoin.org
+              signal='this_my_signal'
+              enableTelemetry
+              onSuccess={() => console.log('success')} // you'll actually want to pass the proof to the API or your smart contract
+              onError={(error) => console.error(error)}
+          />
+          <a href='https://developer.worldcoin.org/hosted/wid_staging_1c829bf138a85d3b022f50708046befa#saveActionUserInterface?signal={this_my_signal}'></a>
+      </div> -->
+    <!-- sidebar starts -->
+    <div class="sidebar">
+      <i class="fab fa-twitter"></i>
+      <div class="post__avatar">
+        <img src="/assets/app_logo.png"/>
+      </div>
+      <div class="sidebarOption active">
+        <span class="material-icons"> home </span>
+        <h2>Home</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <a href="http://127.0.0.1:8000/ep/explore">
+          <span class="material-icons"> explore</span>
+          <h2>Explore</h2>
+        </a>
+      </div>
+
+      <div class="sidebarOption">
+        <a href="http://127.0.0.1:8000/ep/notifications">
+          <span class="material-icons"> notifications_none</span>
+          <h2>Notifications</h2>
+        </a>
+      </div>
+
+
+      <div class="sidebarOption">
+        <a href="http://127.0.0.1:8000/ep/profile">
+          <span class="material-icons"> perm_identity </span>
+          <h2>Profile</h2>
+        </a>
+      </div>
+    </div>
+    <!-- sidebar ends -->
+    <br>
+    <!-- widgets starts -->
+    <div class="widgets">
+      <div class="widgets__input">
+        <span class="material-icons widgets__searchIcon"> search </span>
+        <input type="text" placeholder="Search in Swirl"/>
+      </div>
+    </div>
+    <!-- widgets ends -->
+    <br>
+    <br>
+      <!-- tweetbox starts -->
+      <div class="tweetBox">
+        <form>
+          <div class="tweetbox__input">
+            <img
+              src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+              alt=""
+            />
+            <input type="text" placeholder="What's happening?" />
+          </div>
+          <button class="tweetBox__tweetButton">Post Swirl</button>
+        </form>
+      </div>
+      <!-- tweetbox ends -->
+      <br>
+      <br>
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+            alt=""/>
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Fazlı Altun
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@faltungg</span
+                >
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Elektrikli araba değil TESLA!.</p>
+            </div>
+          </div>
+          <div class="post__footer">
+            <span class="material-icons"> repeat </span>
+            <span class="material-icons"> favorite_border </span>
+            <span class="material-icons"> publish </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+      <br>
+      <br>
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+            alt=""
+          />
+        </div>
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Berke Babaoğlu
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@smoker</span
+                >
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+          </div>
+          <div class="post__footer">
+            <span class="material-icons"> repeat </span>
+            <span class="material-icons"> favorite_border </span>
+            <span class="material-icons"> publish </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+    </div>
+    <!-- feed ends -->
+
+    
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="{{ url_for('statics', path='/explore.css') }}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <title>Explore</title>
+</head>
+<body>
+      <!-- sidebar starts -->
+      <div class="sidebar">
+        <i class="fab fa-twitter"></i>
+        <div class="post__avatar">
+          <img src="../assets/app_logo.png"/>
+        </div>
+        <div class="sidebarOption">
+            <a href="http://127.0.0.1:8000/ep/main">
+              <span class="material-icons"> home</span>
+              <h2>Home</h2>
+            </a>
+          </div>
+  
+        <div class="sidebarOption active">
+          <span class="material-icons"> explore </span>
+          <h2>Explore</h2>
+        </div>
+  
+        <div class="sidebarOption">
+            <a href="http://127.0.0.1:8000/ep/notifications">
+              <span class="material-icons"> notifications_none</span>
+              <h2>Notifications</h2>
+            </a>
+          </div>
+  
+        <div class="sidebarOption">
+            <a href="http://127.0.0.1:8000/ep/profile">
+              <span class="material-icons"> perm_identity </span>
+              <h2>Profile</h2>
+            </a>
+          </div>
+          
+      </div>
+      <!-- sidebar ends -->
+      <!-- widgets starts -->
+    <div class="widgets">
+        <div class="widgets__input">
+          <span class="material-icons widgets__searchIcon"> search </span>
+          <input type="text" placeholder="Search in Swirl"/>
+        </div>
+      </div>
+      <!-- widgets ends -->
+</body>
+</html>

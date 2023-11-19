@@ -1,0 +1,19 @@
+
+<head>
+	<link href="{{ url_for('statics', path='/otp.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+	<form class="input" method="get" action="/access_token">
+		<label for="otpassword"></label>
+        <input type="text" name="otpassword" id="otp" placeholder="1234567" required />
+		
+		<label for=""></label>
+		<input type="submit" value="Sign Up" />
+		
+		<div class="progressbar">
+			<div class="bar"></div>
+		</div>
+	</form>
+</body>

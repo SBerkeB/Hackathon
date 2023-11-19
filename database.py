@@ -2,7 +2,6 @@ from fastapi import APIRouter, Request, Form, Depends, Response
 from fastapi.responses import RedirectResponse
 from dataclasses import dataclass
 from dotenv import dotenv_values
-# from cryptography.fernet import Fernet
 
 
 import os
@@ -11,63 +10,53 @@ import jwt
 
 
 CFG = dotenv_values(".env")
-# fernet = Fernet("a2Wn5KsaXtzTFfDAlQuxeRZQqmdnhIBrkkNUwNgLZdk=")
 
 @dataclass
 class User():
-    username: str
     twitterAt: str
-    balance: float
+    username: str
     followerCount: int
     followingCount: int
     holdersCount: int
-    buyPrice: int
-    sellPrice: int
+    confirmed: bool = False
 
-router = APIRouter(prefix="/db")
-
-
-# def writeToDB(object, db):
-#     if db.insert_one(object)
+router = APIRouter(prefix="/db",
+                   tags=["database"])
 
 
-@router.post("/db_check")
-async def db_check(request: Request, user: User = Depends()):
-    if request.app.database["users"].find_one({"twitterAt": user.twitterAt}):
+
+
+@router.post("/db_check/{twitterAt}")
+async def dbCheck(request: Request, twitterAt):
+    if request.app.database["users"].find_one({"twitterAt": twitterAt}):
         return json.dumps({"success": True,
                            "action": "found"})
-    elif request.app.database["users"].insert_one(user.__dict__):
+    elif request.app.database["users"].insert_one({"twitterAt": twitterAt,
+                                                   "username": "",
+                                                   "followerCount": 0,
+                                                   "followingCount": 0,
+                                                   "holdersCount": 0}):
         return json.dumps({"success": True,
                            "action": "create"})
     else:
         return json.dumps({"success": False,
-                           "action": "false"})
+                           "action": ""})
 
 
+@router.get("/get_user_data/{twitterAt}")
+async def getUserData(request: Request, twitterAt):
+    found = request.app.database["users"].find_one({"twitterAt": twitterAt})
+    
+    if found:
+        return json.dumps({"success": True,
+                          "action": "found",
+                          "data": found})
+    else:
+        return json.dumps({"success": False,
+                           "action": ""})
+        
 
-# @router.get("/write_to_db/{encoded_jwt}")
-# async def write_to_db(request: Request, encoded_jwt):
-    
-#     decoded = jwt.decode(encoded_jwt, CFG["JWT_SECRET"], algorithms=["256"])
-    
-#     db_object = {
-#         "username": decoded["username"],
-#         "twitterAt": decoded["twitterAt"],
-#         "balance": decoded["balance"],
-#         "followerCount": decoded["followerCount"],
-#         "followingCount": decoded["followingCount"],
-#         "holdersCount": decoded["holdersCount"],
-#         "buyPrice": decoded["buyPrice"],
-#         "sellPrice": decoded["sellPrice"]
-#     }
-    
-#     print(db_object)
-    
-#     created = request.app.database["users"].insert_one(db_object)
-    
-#     if created:
-#         return json.dumps({"success": True,
-#                            "action": "create"})
-#     else:
-#         return json.dumps({"success": False,
-#                            "action": "create"})
+@router.post("/set_user_data/{username}")
+async def setUserData(request: Request, username):
+    newvalues = { "$set": { 'username': username } }
+    isSet = request.app.database["users"].update_one({"twitterAt": username})

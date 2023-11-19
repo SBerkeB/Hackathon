@@ -1,12 +1,14 @@
 from fastapi import FastAPI
-# from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from pymongo import MongoClient
 from dotenv import dotenv_values
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 
 import database
-import user_access
+# import auth.user_access as user_access
+import endpoints
+import twitter_auth
 #import os
 
 
@@ -15,13 +17,24 @@ CFG = dotenv_values(".env")
 
 app = FastAPI()
 
+origins = ["null", "http://127.0.0.1:5500"]
+app.add_middleware(CORSMiddleware, 
+                   allow_origins=origins, 
+                   allow_credentials=True, 
+                   allow_methods=["*"], 
+                   allow_headers=["*"])
+
+app.mount("/statics", StaticFiles(directory="statics"), name="statics")
+
 app.include_router(database.router)
-app.include_router(user_access.router)
+# app.include_router(user_access.router)
+app.include_router(endpoints.router)
+app.include_router(twitter_auth.router)
 
-templates = Jinja2Templates(directory="/html")
-# app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# templates = Jinja2Templates(directory="templates")
+
+
+
 
 
 @app.on_event("startup")
