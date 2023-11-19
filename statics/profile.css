@@ -25,6 +25,74 @@
     background-color: var(--bc-gray);
     transition: background-color .2s ease-in-out;
   }
+  /* Add this to your existing CSS or create a new stylesheet */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  text-align: center;
+}
+
+.popup-content {
+  border-radius: 8px;
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+  font-weight: bold;
+  z-index: 10000;
+  
+}
+hr {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  
+}
+.buy-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #1dc487;
+  color: white;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+.sell-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #e83445;
+  color: white;
+  border-radius: 8px;
+  margin: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+.button-price {
+  font-size: 14px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
   main {
     min-height: 100vh;
   }
@@ -383,7 +451,6 @@
   .user-icon-wrapper {
     width: 100%;
     position: absolute;
-    z-index: 12;
   }
   .user-icon {
     width: 100%;
@@ -391,10 +458,8 @@
     border-radius: 50%;
     border: .5em solid var(--bc);
     background-color: var(--bc);
-    z-index: 12;
   }
   .user-header-inner {
-    z-index: 5;
     width: 100%;
     height: 100%;
     position: relative;
@@ -405,7 +470,6 @@
     height: 100%;
     position: absolute;
     background-color: rgba(0, 0, 0, .15);
-    z-index: 6;
   }
   .user-header {
     width: 100%;

@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(directory="html")
 
 
-router = APIRouter(tags=["endpoints"])
+router = APIRouter(prefix="/ep", tags=["endpoints"])
 
 # @router.get("/main_page")
 # async def mainPage():

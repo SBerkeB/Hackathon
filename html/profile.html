@@ -9,6 +9,109 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
   <body>
+    <script>
+
+    const { ethers } = require("ethers"); // ethers 5.7.0
+
+    const provider = new ethers.providers.JsonRpcProvider(
+    "https://sepolia-rpc.scroll.io/"
+    );
+
+    const signer = new ethers.Wallet(
+    "0202ff323cfa5ebeeb5fa70e28dd3cb0a647ecde5a458f21d3a70ead3e2adf1d",
+    provider
+    );
+
+    const ABI = [
+    "function owner() view returns (address)",
+    "function getBuyPrice(address sharesSubject, uint256 amount) view returns (uint256)",
+    "function getSellPrice(address sharesSubject, uint256 amount) view returns (uint256)",
+    "function sharesBalance(address account, address sharesSubject) view returns (uint256)",
+    "function buyShares(address shareSubject,uint256 amount)",
+    "function sellShares(address shareSubject,uint256 amount)",
+    ];
+    let address = "0x93D8E9B878A8C150a94C42D69908D3AF47028665";
+
+    const contract = new ethers.Contract(address, ABI, provider);
+
+    let metaAd = await window.ethereum.request({ method: "eth_requestAccounts" });
+    metaAd = metaAd[0];
+    console.log(metaAd);
+
+    function handleBuyButton(){
+        const main3 = async () => {
+            let gas = await provider.getGasPrice();
+            const overrides = {
+              gasLimit: 2000000, // Set an appropriate gas limit
+              gasPrice: ethers.utils.parseUnits(gas.toString(), 'wei'), // Set an appropriate gas price
+            };
+            await contract.connect(signer).buyShares(metaAd, 1, overrides);
+        };
+        main3();
+    }
+
+    function handleSellButton(){
+        const main4 = async () => {
+            let gas = await provider.getGasPrice();
+            const overrides = {
+              gasLimit: 2000000, // Set an appropriate gas limit
+              gasPrice: ethers.utils.parseUnits(gas.toString(), 'wei'), // Set an appropriate gas price
+            };
+            await contract.connect(signer).sellShares(metaAd, 1, overrides);
+        };
+        main4();
+    }
+
+    //
+    //
+    //
+
+    const main1 = async () => {
+        const price = await contract.getBuyPrice(metaAd, 1);
+
+        let buyPrice = document.getElementById("buy_price");
+
+        buyPrice.innerHTML(ethers.utils.formatEther(price));
+    };
+      
+    main1();
+
+
+    const main2 = async () => {
+        const balance = await contract.sharesBalance(metaAd, metaAd);
+        console.log(balance);
+        if (balance == 0) {
+          return 0;
+        }
+        const price = await contract.getSellPrice(metaAd, 1);
+
+        let sellPrice = document.getElementById("sell_price");
+
+        sellPrice.innerHTML(ethers.utils.formatEther(price));
+    };
+      
+    main2();
+    </script>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Trade Tickets</h2>
+            <hr>
+            <div class="button-column">
+                <button class="buy-button" id="buy_button" onclick="handleBuyButton()">
+                    <div class="button-text">Buy Ticket</div>
+                    <div class="button-price" id="buy_price"> $25</div>
+                </button>
+                <button class="sell-button" id="sell_button" onclick="handleSellButton()">
+                    <div class="button-text">Sell Ticket</div>
+                    <div class="button-price" id="sell_price"> $15</div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    
 <nav id="navbar">
     <div class="nav-left">
         <div id="button1" class="nav-button">
@@ -37,22 +140,6 @@
             <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-shopping-bag"></i> Notifications</span></a></li>
         </ul>
     </div>
-    <div class="menu-center">
-        <h3>Useful Links</h3>
-        <ul class="menu-items">
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-bookmark"></i> Tutorials</span></a></li>
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-map-marker-info"></i> Dynmap</span></a></li>
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class='uil uil-server-alt'></i> Servers</span></a></li>
-        </ul>
-    </div>
-    <div class="menu-right">
-        <h3>Admin Tools</h3>
-        <ul class="menu-items">
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-lightbulb"></i> Control Panel</span></a></li>
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-brackets-curly"></i> Code Editor</span></a></li>
-            <li class="menu-item"><a class="menu-item-inner" href=""><span><i class="uil uil-window"></i> Info & Status</span></a></li>
-        </ul>
-    </div>
     <div class="menu-right-space"></div>
 </div>
 <div class="back-to-top" style="display: block; opacity: 1;">
@@ -67,7 +154,7 @@
     <div class="user-header-wrapper flexbox">
         <div class="user-header-inner flexbox">
             <div class="user-header-overlay"></div>
-            <img class="user-header" src="https://i.imgur.com/WS9ODfZ.jpg" alt="">
+            <img class="user-header" src="assets/WS9ODfZ.jpg" alt="">
         </div>
     </div>
     <div class="user-info-bar">
@@ -76,7 +163,7 @@
         <div class="ufo-bar-col2">
             <div class="ufo-bar-col2-inner">
                 <div class="user-icon-wrapper">
-                    <img class="user-icon" src="https://i.imgur.com/aviQ5vj.jpg" alt="">
+                    <img class="user-icon" src="assets/aviQ5vj.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -103,7 +190,11 @@
         </div>
         <div class="ufo-bar-col4">
             <div class="ufo-bar-col4-inner">
-                <button class="button2 btn-primary2"><i class="uil uil-plus"></i> Buy Token<div class="btn-secondary2"></div></button>
+                <button id="buyTokenButton" class="button2 btn-primary2">
+                    <i class="uil uil-plus"></i> Buy Token
+                    <div class="btn-secondary2"></div>
+                  </button>
+                  
             </div>
         </div>
         <div class="ufo-bar-col5">
@@ -142,3 +233,20 @@
 </main>
 <footer id="footer" class="flexbox-col">
 </footer>
+
+<!-- Add this to your existing script or create a new script block -->
+<script>
+    // Function to display the pop-up
+    function openPopup() {
+      document.getElementById("popup").style.display = "block";
+    }
+  
+    // Function to close the pop-up
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  
+    // Add a click event listener to the "Buy Token" button
+    document.getElementById("buyTokenButton").addEventListener("click", openPopup);
+  </script>
+  </body>
