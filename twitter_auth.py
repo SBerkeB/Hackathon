@@ -45,12 +45,12 @@ def request_token(oauth_callback):
 
 
 @router.get('/access_token')
-def access_token(request: Request, otp: Otp = Form(...)):
-    print(otp)
+def access_token(request: Request, otpassword: Otp = Form(...)):
+    print(otpassword)
     print("oauth_verifier")
     print(request.cookies.get("Authorization")["oauth_token"])
     try:
-        return twitter.access_token(request.cookies.get("Authorization")["oauth_token"], otp)
+        return twitter.access_token(request.cookies.get("Authorization")["oauth_token"], otpassword)
     except tweepy.TweepError as e:
         print('Twitter Exception: ', e)
         raise ErrorResponse.tw_access_invalid
